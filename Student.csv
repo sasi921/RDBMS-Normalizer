@@ -1,0 +1,6 @@
+﻿StudentID,FirstName,LastName,Section,Contact,Parent_no,Streetno,City,State,Zipcode,Department,AdvisorID,Advisor name,Advisor Contact
+1,Sasidhar,Velkuri,A,5736471122,9035736473,2041 Vichy,Rolla,MO,65401,CS,1,Ric,5736471462
+2,Pooja,Morampudi,B,5736471122,9035736474,2083 Vichy,Rolla,MO,65402,IST,2,Win,5736471462
+3,Moksha,Nadella,C,5736473322,9035736475,13 ozak,Ozak,MP,65403,CS,1,Ric,5736473462
+4,Jhon,Bright,A,5736474422,9035736476,15th apt White Cols,Robert,AZ,65404,MECH,3,Wang,5736474462
+5,Lewis,Hamilton,C,5736475522,9035736477,14th newcastle,Stlouis,MO,65405,CE,4,Das,5736475462

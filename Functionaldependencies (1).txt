@@ -1,0 +1,4 @@
+StudentID -> FirstName, LastName, Section, Contact, Parent_no, Streetno, City, State, Zipcode, Department, AdvisorID
+AdvisorID -> Advisor name, Advisor Contact
+StudentID, AdvisorID -> Section
+Zipcode -> City, State
