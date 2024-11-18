@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[37]:
-
-
 # main file to read csv_file and import other files
 import pandas as pd
 import csv
@@ -13,7 +7,7 @@ from outputallformtables import op1NF, op2_3_bcnf_4_5
 
 
 # Reading the input csv file and the Functionaldependencies text file
-input_file = pd.read_csv('student.csv')
+input_file = pd.read_csv('exampleInputTable.csv')
 print('GivenTable')
 print(input_file)
 print('\n')
@@ -176,4 +170,3 @@ if Give_highnf == 1:
     print('\n')
     print(high_nf)
     print('\n')
-
