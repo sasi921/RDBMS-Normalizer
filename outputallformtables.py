@@ -58,4 +58,3 @@ def op2_3_bcnf_4_5(relations):
             query = query.rstrip(',\n') + "\n);"
 
         print(query)
-
