@@ -1,4 +1,6 @@
 # main file to read csv_file and import other files
+from pathlib import Path
+
 import pandas as pd
 import csv
 import normalizedformtables
@@ -6,13 +8,20 @@ import data_parser
 from outputallformtables import op1NF, op2_3_bcnf_4_5
 
 
+# Resolve bundled sample inputs relative to this script so the program works
+# regardless of the caller's current working directory.
+BASE_DIR = Path(__file__).resolve().parent
+INPUT_CSV = BASE_DIR / 'Student.csv'
+FD_FILE = BASE_DIR / 'Functionaldependencies.txt'
+MVD_FILE = BASE_DIR / 'mvd_fds.txt'
+
 # Reading the input csv file and the Functionaldependencies text file
-input_file = pd.read_csv('exampleInputTable.csv')
+input_file = pd.read_csv(INPUT_CSV)
 print('GivenTable')
 print(input_file)
 print('\n')
 
-with open('Functionaldependencies.txt', 'r') as file:
+with FD_FILE.open('r', encoding='utf-8') as file:
     lines = [line.strip() for line in file]
 
 Functionaldependencies = {}
@@ -49,7 +58,7 @@ Primarykey = keys
 
 mvd_fds = {}
 if not HighestNormalform == 'B' and HighestNormalform >= 4:
-    with open('mvd_fds.txt', 'r') as file:
+    with MVD_FILE.open('r', encoding='utf-8') as file:
         mvd_lines = [line.strip() for line in file]
 
     print(mvd_lines)
@@ -151,7 +160,7 @@ if not HighestNormalform == 'B' and HighestNormalform >= 4:
         op2_3_bcnf_4_5(nffour_table)
 
 if not HighestNormalform == 'B' and HighestNormalform >= 5:
-    nf5rel ,five_flag = normalizedformtables.normalizationform_five(
+    nf5rel, five_flag = normalizedformtables.normalizationform_five(
         nffour_table, Primarykey, Functionaldependencies)
 
     if one_flag and two_flag and three_flag and bcnf_flag and four_flag and five_flag:
