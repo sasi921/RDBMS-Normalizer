@@ -1,31 +1,82 @@
-# RDBMS-Normalizer
-**Objective:**
+# RDBMS Normalizer
 
-Develop an automated tool to normalize a relational database schema from 1NF to 5NF. The program will parse user inputs for database schema, functional dependencies (FDs), multi-valued dependencies (MVDs), and data instances where required, providing a final, normalized schema and SQL queries that represent the target normal form.
+A Python tool for exploring relational-database normalization from **1NF through 5NF**. It reads relation data and dependency definitions, applies normalization logic, and produces normalized table representations and SQL-oriented output.
 
-**Program inputs:**
+## What this project demonstrates
 
-The program requires the database schema, including table structure with attributes, primary and candidate keys, and multi-valued attributes; functional dependencies in the form of X → Y to guide normalization; user-specified multi-valued dependencies for 4NF verification; and a target normal form to determine the extent of normalization, outputting SQL CREATE TABLE statements and a normalized schema representation with constraints.
+- Parsing tabular input and dependency definitions
+- Functional-dependency analysis and candidate/superkey reasoning
+- Progressive normalization across 1NF, 2NF, 3NF, BCNF, 4NF, and 5NF
+- Multivalued-dependency handling for higher normal forms
+- SQL-oriented output for decomposed relations
 
-**Working of the program:**
+## Repository structure
 
-The program begins by receiving the database schema details, including tables, attributes, primary keys, candidate keys, and any multi-valued attributes. It then reads functional dependencies (FDs) and multi-valued dependencies (MVDs) to guide the normalization process, alongside the user-defined target normal form. Each table is processed independently, ensuring a structured approach to normalization.
+The current repository uses these top-level files:
 
-As it works, the program applies the normalization rules step-by-step: moving to 1NF by making attributes atomic, then to 2NF by removing partial dependencies, then to 3NF by eliminating transitive dependencies, and finally to BCNF by ensuring all tables have only one candidate key. If the target form is 4NF or 5NF, it further decomposes tables based on verified MVDs, creating fully normalized tables without redundancy.
+| File | Purpose |
+| --- | --- |
+| `Main.py` | Command-line entry point and orchestration |
+| `data_parser.py` | Converts input data into the structures used by the normalizer |
+| `normalizedformtables.py` | Core normalization and dependency logic |
+| `outputallformtables.py` | Formats normalized relations and SQL-oriented output |
+| `Student.csv` | Small example relation used to exercise the program |
+| `Functionaldependencies.txt` | Example functional-dependency definitions |
+| `mvd_fds.txt` | Example multivalued-dependency definitions |
+| `RDBMS Normalizer.pdf` | Project report and design background |
 
-The program validates MVDs by checking data instances to ensure they hold before decomposing to 4NF. For each normalized table, it outputs an SQL CREATE TABLE statement with appropriate constraints such as primary and foreign keys. The program also provides a detailed schema representation, either in text or diagrammatic form, that shows each table, its attributes, primary keys, and any defined constraints, resulting in a streamlined and efficient database design.
+> Note: the entry point is named `Main.py` with a capital **M**. This matters on case-sensitive operating systems.
 
-**Functionality of each file: The program is organized into four essential components:**
+## Quick start
 
-**main.py:** Acts as the primary entry point of the program. This file manages user input redirection, initializes modules, and controls the overall program flow by orchestrating the parsing, normalization, and SQL generation processes.
+### 1. Clone the repository
 
-**data_parser.py:** Focuses on efficiently parsing input from multiple sources, such as CSV files, text files, or direct user input. This module ensures all data is accurately extracted, cleaned, and formatted for use in the normalization and SQL generation processes.
+```bash
+git clone https://github.com/sasi921/RDBMS-Normalizer.git
+cd RDBMS-Normalizer
+```
 
-**normalizedformtables.py:** Contains the core logic for table normalization, guiding each input relation through a systematic normalization process from 1NF up to 5NF. This file implements the rules and dependencies necessary for decomposing tables into fully normalized forms.
+### 2. Create an isolated Python environment
 
-**outputallformtables.py:** Generates SQL queries based on the normalized tables, creating CREATE TABLE statements with appropriate constraints. This component ensures that each normalized form is represented in SQL format, ready for database creation and deployment.
+```bash
+python -m venv .venv
+```
 
-**Team Members:**
+Activate it with the command appropriate for your operating system, then install the project dependencies if a dependency manifest is present on the branch you are using.
 
-1.Sasidhar Reddy Velkuri(svdfy@mst.edu)
-2.Venkata Mokshagna Nadella(vnqrd@mst.edu)
+The source imports `pandas`, so a minimal manual setup is:
+
+```bash
+python -m pip install pandas
+```
+
+### 3. Run the normalizer
+
+```bash
+python Main.py
+```
+
+The repository includes `Student.csv`, `Functionaldependencies.txt`, and `mvd_fds.txt` as small example inputs for exploring the workflow.
+
+## How the normalization workflow fits together
+
+1. **Input parsing** — relation data and dependency definitions are loaded and converted into Python structures.
+2. **Dependency analysis** — the program reasons about functional dependencies, keys, and normalization conditions.
+3. **Progressive decomposition** — relations are transformed toward the requested normal form.
+4. **Higher-normal-form checks** — multivalued dependencies are considered for 4NF/5NF processing.
+5. **Output generation** — the resulting relations are formatted for inspection and SQL-oriented use.
+
+This separation keeps input handling, normalization logic, and output generation in distinct modules, making the implementation easier to inspect and extend.
+
+## Example inputs
+
+The checked-in sample files are intentionally small so the algorithm can be reviewed without first sourcing an external dataset. When experimenting with your own schema, keep a copy of the example files and introduce changes incrementally; higher-normal-form behavior depends on the supplied dependency definitions as well as the relation data.
+
+## Project scope
+
+This repository is an educational implementation of relational normalization concepts rather than a production database-migration system. Generated decompositions and SQL should be reviewed before applying them to a real database, especially when working with domain-specific constraints that cannot be inferred from sample data alone.
+
+## Team
+
+- Sasidhar Reddy Velkuri
+- Venkata Mokshagna Nadella
